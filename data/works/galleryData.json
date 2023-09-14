@@ -1,0 +1,67 @@
+{
+    "galleryData": [
+        {
+            "id": 1,
+            "title": "Leaf photography",
+            "category": "gallery-item-visible product",
+            "link": "/works-inside",
+            "imgSrc": "assets/img/placeholder/637x637.jpg"
+        },
+        {
+            "id": 2,
+            "title": "Glasses photography",
+            "category": "gallery-item-visible culture personal portrait",
+            "link": "/works-inside",
+            "imgSrc": "assets/img/placeholder/637x637.jpg"
+        },
+        {
+            "id": 3,
+            "title": "Painting photography",
+            "category": "gallery-item-visible product",
+            "link": "/works-inside",
+            "imgSrc": "assets/img/placeholder/637x637.jpg"
+        },
+        {
+            "id": 4,
+            "title": "Plant photography",
+            "category": "gallery-item-visible culture",
+            "link": "/works-inside",
+            "imgSrc": "assets/img/placeholder/637x637.jpg"
+        },
+        {
+            "id": 5,
+            "title": "Phone photography",
+            "category": "gallery-item-visible culture",
+            "link": "/works-inside",
+            "imgSrc": "assets/img/placeholder/637x637.jpg"
+        },
+        {
+            "id": 6,
+            "title": "Composition photography",
+            "category": "gallery-item-visible product",
+            "link": "/works-inside",
+            "imgSrc": "assets/img/placeholder/637x637.jpg"
+        },
+        {
+            "id": 7,
+            "title": "Laptop photography",
+            "category": "gallery-item-visible wedding culture personal",
+            "link": "/works-inside",
+            "imgSrc": "assets/img/placeholder/637x637.jpg"
+        },
+        {
+            "id": 8,
+            "title": "Notebook photography",
+            "category": "gallery-item-visible product",
+            "link": "/works-inside",
+            "imgSrc": "assets/img/placeholder/637x637.jpg"
+        },
+        {
+            "id": 9,
+            "title": "Book photography",
+            "category": "gallery-item-visible art product",
+            "link": "/works-inside",
+            "imgSrc": "assets/img/placeholder/637x637.jpg"
+        }
+    ]
+}

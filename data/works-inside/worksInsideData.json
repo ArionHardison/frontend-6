@@ -1,0 +1,19 @@
+{
+    "worksInsideData": [
+        {
+            "id": 1,
+            "imgSrc": "assets/img/placeholder/966x560.jpg",
+            "alt": "Product photography"
+        }, 
+        {
+            "id": 2,
+            "imgSrc": "assets/img/placeholder/966x560.jpg",
+            "alt": "Product photography"
+        }, 
+        {
+            "id": 3,
+            "imgSrc": "assets/img/placeholder/966x560.jpg",
+            "alt": "Product photography"
+        }
+    ]
+}
