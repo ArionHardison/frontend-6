@@ -45,8 +45,6 @@
 
 <script>
     import { Fragment } from 'vue-fragment';
-    import ImagesLoaded from 'imagesloaded';
-
     import FilterData from '~/data/works/filterData.json';
     import GalleryData from '~/data/works/galleryData.json';
 
@@ -59,8 +57,7 @@
             }
         },
         components: {
-            Fragment,
-            ImagesLoaded
+            Fragment
         },
         computed: {
             currentPage() {
@@ -86,50 +83,57 @@
                 this.changeLayout( filterValue )
             },
             changeLayout: function( newFilter ) {
-                const grid = document.querySelector( '.gallery-items' );
+              if(process.client) {
+                const grid = document.querySelector('.gallery-items');
 
-                if ( this.iso === undefined ) {
-                    this.iso = new Isotope( grid, {
-                        itemSelector: '.gallery-item',
-                        masonry: {
-                            horizontalOrder: true
-                        }
-                    });
+                if (this.iso === undefined) {
+                  this.iso = new Isotope(grid, {
+                    itemSelector: '.gallery-item',
+                    masonry: {
+                      horizontalOrder: true
+                    }
+                  });
                 }
 
-                if ( newFilter === '*' ) {
-                    this.iso.arrange( { filter: `*` } );
+                if (newFilter === '*') {
+                  this.iso.arrange({filter: `*`});
 
                 } else {
-                    this.iso.arrange( { filter: newFilter  } );
+                  this.iso.arrange({filter: newFilter});
                 }
+              }
             }
         },
         mounted() {
-            const lastLi = document.querySelector( '.gallery .gallery-filter').lastElementChild;
-            lastLi.remove();
+            if(process.client) {
+              const lastLi = document.querySelector('.gallery .gallery-filter').lastElementChild;
+              lastLi.remove();
 
-            const filters = document.querySelectorAll( '.gallery-filter .click' );
-            filters.forEach( filter => {
-                if ( filter.getAttribute( 'data-filter' ) === '*' ) {
-                    filter.classList.add( 'active' );
+              const filters = document.querySelectorAll('.gallery-filter .click');
+              filters.forEach(filter => {
+                if (filter.getAttribute('data-filter') === '*') {
+                  filter.classList.add('active');
                 }
-            });
+              });
 
-            const grid = document.querySelector( '.gallery-items' );
+              const grid = document.querySelector('.gallery-items');
 
-            const iso = new Isotope( grid, {
-                itemSelector: '.gallery-item',
-                masonry: {
+              import('isotope-layout').then(Isotope => {
+                this.iso = new Isotope.default('.gallery-items', {
+                  itemSelector: '.gallery-item',
+                  masonry: {
                     horizontalOrder: true
-                }
-            });
+                  }
+                });
 
-            const imgLoad = new ImagesLoaded( grid );
-
-            imgLoad.on( 'progress', function( instance, image ) {
-                iso.layout();
-            } );
+                import('imagesloaded').then(ImagesLoaded => {
+                  const imgLoad = ImagesLoaded.default('.gallery-items');
+                  imgLoad.on('progress', () => {
+                    this.iso.layout();
+                  });
+                });
+              });
+            }
         }, 
         unmounted() {
             this.iso.destroy();

@@ -2,9 +2,9 @@
     <section id="page-title">
         <div class="wrapper">
             <div class="title position-relative">
-                <h1 class="c">Contacts<span class="dot">.</span></h1>
+                <h1 class="c">{{title}}<span class="dot">{{titleH}}</span></h1>
                         
-                <div class="title-clone">Contacts.</div>
+                <div class="title-clone">{{title}}{{titleH}}</div>
             </div>
         </div>
     </section>
@@ -12,6 +12,16 @@
 
 <script>
     export default {
-        name: 'Page-Title'
+        name: 'Page-Title',
+        props: {
+          title: {
+            type: String,
+            default: ""
+          },
+          titleH: {
+            type: String,
+            default: ""
+          }
+        }
     }
 </script>

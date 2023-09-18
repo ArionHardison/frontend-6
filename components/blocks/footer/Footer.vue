@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-xl-4 col-lg-4 align-self-center">
                         <div class="copyright">
-                            <p>© {{ new Date().getFullYear() }} Portfolio Template By <a href="https://www.adveits.com">Adveits</a></p>
+                            <p>© {{ new Date().getFullYear() }} {{copyright}}</p>
                         </div>
                     </div>
                 
@@ -33,6 +33,7 @@
     import SearchModal from '~/components/Modal/SearchModal';
     import MenuSecondary from '~/components/blocks/General/MenuSecondary';
 
+
     export default {
         name: 'Footer',
         components: {
@@ -40,6 +41,11 @@
             MenuModal,
             SearchModal,
             MenuSecondary
-        }
+        },
+        computed: {
+          copyright(){
+            return this.$store.state.layout.items.copy;
+          },
+        },
     }
 </script>

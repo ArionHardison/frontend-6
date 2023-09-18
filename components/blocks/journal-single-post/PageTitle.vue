@@ -2,9 +2,12 @@
     <section id="page-title">
         <div class="wrapper">
             <div class="title position-relative">
-                <h1 class="small">What to do <br>when <span class="line">holidays</span> go wrong</h1>
-                        
-                <div class="title-clone">Journal.</div>
+                <template v-if="title">
+                  <h1 class="small">{{title}}</h1>
+                </template>
+                <template v-if="category">
+                  <div class="title-clone">{{category}}</div>
+                </template>
             </div>
         </div>
     </section>
@@ -12,6 +15,16 @@
 
 <script>
     export default {
-        name: 'PageTitle'
+        name: 'PageTitle',
+        props: {
+          title: {
+            type: String,
+            default: null
+          },
+          category: {
+            type: String,
+            default: null
+          }
+        }
     }
 </script>

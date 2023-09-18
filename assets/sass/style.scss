@@ -211,6 +211,22 @@ html {
         font-size: 12px;
     }
 }
+.eye-block-container {
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    left: 5px !important;
+    right: auto !important;
+}
+.w-50  {
+    width: 50%;
+}
+.eye-block-container .input-group-text {
+    border:none;
+    outline: none;
+    background: transparent;
+}
 
 body {
     background-color: $body_background_color;

@@ -7,7 +7,9 @@
         <select
           :id="`${name}-input`"
           v-model="content"
-          class="form-control"
+          :class="{
+          'form-control': label,
+          }"
           :error="formErrors[name] ? [...formErrors[name]].shift() : ''"
           :name="name"
           :disabled="disabled || options.length === 0"

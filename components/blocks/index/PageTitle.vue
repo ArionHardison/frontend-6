@@ -4,13 +4,13 @@
             <div class="row">
                 <div class="col col-1 position-relative">
                     <div class="title">
-                        <h1 class="h">Hello<span class="dot">.</span></h1>
+                        <h1 class="h">{{content.htitle}}<span class="dot">{{content.tpostfix}}</span></h1>
 
-                        <div class="title-clone">Hello</div>
+                        <div class="title-clone">{{content.htitle}}</div>
                     </div>
 
                     <div class="spacer p-top-lg">
-                        <p class="p-large w-75">My name is Luca Reynolds. I’m a photographer and heres is my portfolio. Have a look.</p>
+                        <p class="p-large w-75">{{content.htdescription}}</p>
                     </div>
                 </div>
 
@@ -19,7 +19,7 @@
                         <div class="align-self-start w-100">
                             <div class="img object-fit">
                                 <div class="object-fit-cover">
-                                    <img src="assets/img/placeholder/527x600.jpg" class="img-fluid" alt="Luca Reynolds">
+                                    <img :src="$imageUrl(content.htimage, 'md')" class="img-fluid" :alt="content.htdescription">
                                 </div>
                             </div>
                         </div>
@@ -49,6 +49,12 @@
 
 <script>
     export default {
-        name: 'Page-Title'
+        name: 'Page-Title',
+        props: {
+          content: {
+            type: Object,
+            default: ()=>{}
+          }
+        }
     }
 </script>
