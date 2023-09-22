@@ -15,7 +15,7 @@
                   <div class="img object-fit">
                     <div class="object-fit-cover">
                       <img
-                          :src="$imageUrl(program.program_image, 'lg', false)"
+                          :src="$imageUrl(program.program_image, 'md', false)"
                           :alt="program.name"
                       />
                     </div>
@@ -27,17 +27,13 @@
                     <span class="large">{{ fromIso(program.created_at).day }}</span> {{ fromIso(program.created_at).monthShort}}
                   </p>
 
-                  <Meta />
+
 
                   <div class="description">{{program.description}}</div>
-
-                  <Tags />
-
-                  <Comments />
                 </div>
 
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                  <Sidebar />
+                  <Sidebar :program="program"/>
                 </div>
               </div>
             </div>

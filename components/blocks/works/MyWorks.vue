@@ -1,39 +1,43 @@
 <template>
     <div class="gallery">
-        <div class="wrapper">
+       <div class="wrapper">
             <ul class="gallery-filter list-unstyled no-space">
-                <fragment v-for="filterItem in filterItems" :key="filterItem.id">
-                    <li @click="filter">
-                        <a :title="filterItem.title" class="btn btn-link transform-scale-h click" :data-filter="filterItem.filter" href="">{{ filterItem.title }}</a>
-                    </li>
+                <template v-if="containers.workCats">
+                 <fragment v-for="category in containers.workCats" :key="category.id">
+                        <li @click="filter">
+                            <a :title="category.catname" class="btn btn-link transform-scale-h click" :data-filter="category.filter" href="">{{ category.catname }}</a>
+                        </li>
 
-                    <li>
-                        <span class="btn btn-link">-</span>
-                    </li>
-                </fragment>
+                        <li>
+                            <span class="btn btn-link">-</span>
+                        </li>
+                    </fragment>
+                </template>
             </ul>
         </div>
 
         <div class="gallery-item-wrapper">
             <div class="gallery-items">
-                <router-link v-for="galleryItem in galleryItems" :key="galleryItem.id" :title="galleryItem.title" :class="[ 'gallery-item active ' + galleryItem.category ]" :to="galleryItem.link">
-                    <div class="img object-fit">
-                        <div class="object-fit-cover">
-                            <img :src="galleryItem.imgSrc" :alt="galleryItem.title">
-                        </div>
-                    </div>
+                <template v-if="containers.workslist">
+                  <nuxt-link v-for="work in containers.workslist.hpwList" :key="work.id" :title="work.workTitle_op" :class="[ 'gallery-item active ' + `filter_${work.prodCategorySeletected}` ]" :to="`/work/${$slug(work.id, work.workTitle_op)}`">
+                      <div class="img object-fit">
+                          <div class="object-fit-cover">
+                              <img :src="$imageUrl(work.titleImage, 'md')" :alt="work.workTitle_op">
+                          </div>
+                      </div>
 
-                    <div class="gallery-hover">
-                        <div class="gallery-hover-wrapper">
-                            <h3>{{ galleryItem.title }}</h3>
+                      <div class="gallery-hover">
+                          <div class="gallery-hover-wrapper">
+                              <h3>{{ work.workTitle_op }}</h3>
 
-                            <span class="btn btn-link border-0 transform-scale-h p-0">
-                                Look inside
-                                <i class="icon-c icon-arrow-right"></i>
-                            </span>
-                        </div>
-                    </div>
-                </router-link>
+                              <span class="btn btn-link border-0 transform-scale-h p-0">
+                                  Look inside
+                                  <i class="icon-c icon-arrow-right"></i>
+                              </span>
+                          </div>
+                      </div>
+                  </nuxt-link>
+                </template>
             </div>
         </div>
 
@@ -45,15 +49,13 @@
 
 <script>
     import { Fragment } from 'vue-fragment';
-    import FilterData from '~/data/works/filterData.json';
-    import GalleryData from '~/data/works/galleryData.json';
-
+    import fcms from "@/mixins/fcms";
     export default {
         name: 'My-Works',
+        mixins: [fcms],
         data() {
             return {
-                filterItems: FilterData.filterData,
-                galleryItems: GalleryData.galleryData
+                containers: {}
             }
         },
         components: {
@@ -64,7 +66,50 @@
                 return this.$route.path;
             }
         },
+        async beforeMount() {
+           let containers = await this.getContainers("workslist|workCats")
+            if(containers.workCats){
+              containers.workCats = containers.workCats.map((category)=>{
+                 category.filter = `filter_${category.id}`
+                 return category;
+              })
+            }
+            this.containers = containers;
+            console.log(this.containers);
+            this.setUIprops();
+        },
         methods: {
+            setUIprops(){
+              if(process.client) {
+              /**  const lastLi = document.querySelector('.gallery .gallery-filter').lastElementChild;
+                lastLi.remove();
+
+                const filters = document.querySelectorAll('.gallery-filter .click');
+                filters.forEach(filter => {
+                  if (filter.getAttribute('data-filter') === '*') {
+                    filter.classList.add('active');
+                  }
+                });
+
+                const grid = document.querySelector('.gallery-items');
+
+                import('isotope-layout').then(Isotope => {
+                  this.iso = new Isotope.default('.gallery-items', {
+                    itemSelector: '.gallery-item',
+                    masonry: {
+                      horizontalOrder: true
+                    }
+                  });
+
+                  import('imagesloaded').then(ImagesLoaded => {
+                    const imgLoad = ImagesLoaded.default('.gallery-items');
+                    imgLoad.on('progress', () => {
+                      this.iso.layout();
+                    });
+                  });
+                });**/
+              }
+            },
             filter: function( event ) {
                 event.preventDefault();
 
@@ -104,37 +149,6 @@
               }
             }
         },
-        mounted() {
-            if(process.client) {
-              const lastLi = document.querySelector('.gallery .gallery-filter').lastElementChild;
-              lastLi.remove();
-
-              const filters = document.querySelectorAll('.gallery-filter .click');
-              filters.forEach(filter => {
-                if (filter.getAttribute('data-filter') === '*') {
-                  filter.classList.add('active');
-                }
-              });
-
-              const grid = document.querySelector('.gallery-items');
-
-              import('isotope-layout').then(Isotope => {
-                this.iso = new Isotope.default('.gallery-items', {
-                  itemSelector: '.gallery-item',
-                  masonry: {
-                    horizontalOrder: true
-                  }
-                });
-
-                import('imagesloaded').then(ImagesLoaded => {
-                  const imgLoad = ImagesLoaded.default('.gallery-items');
-                  imgLoad.on('progress', () => {
-                    this.iso.layout();
-                  });
-                });
-              });
-            }
-        }, 
         unmounted() {
             this.iso.destroy();
         }

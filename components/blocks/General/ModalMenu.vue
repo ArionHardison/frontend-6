@@ -44,8 +44,10 @@
 </template>
 
 <script>
+    import api from "@/mixins/api";
     export default {
         name: 'Modal-Menu',
+        mixins: [api],
         data() {
             return {
                 activeClass: 'current-menu-item'

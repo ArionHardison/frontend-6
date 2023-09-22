@@ -1,11 +1,16 @@
 <template>
-    <div class="loadmore spacer m-top-lg text-xl-left text-lg-left text-md-center text-center">
-        <a @click="scrollToSection('#journal-index')" title="Loadmore" class="btn btn-dark transform-scale-h border-0" href="#">Loadmore</a>
-    </div>
+  <div class="loadmore spacer m-top-lg text-center">
+    <button @click="loadMore" title="Load More" class="btn btn-dark border-0 transform-scale-h mb-3">Load More</button>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: 'Loadmore'
+export default {
+  name: 'Loadmore',
+  methods: {
+    loadMore(){
+      this.$emit("load");
     }
+  }
+}
 </script>

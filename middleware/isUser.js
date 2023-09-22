@@ -1,5 +1,5 @@
 export default function ({ store, redirect }) {
   if(store.state.authData.accessToken===null){
-    return redirect(`/sign-in`);
+    return redirect('/auth/login')
   }
 }

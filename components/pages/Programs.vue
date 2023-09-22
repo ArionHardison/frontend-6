@@ -1,5 +1,5 @@
 <template>
-  <div id="journal-single-post-index">
+  <div id="journal-index">
     <Loading />
 
     <Header />
@@ -7,11 +7,19 @@
     <main id="main" class="site-main">
       <PageTitle />
 
-      <section id="page-content" class="spacer m-top-xl">
-        <div class="wrapper">
-          <div id="single">
+      <section id="page-content" class="spacer p-top-xl">
+        <div id="blog">
+          <div class="wrapper">
             <div class="row gutter-width-lg">
-              <Programs/>
+              <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                <Blog />
+
+                <LoadMore />
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                <Sidebar />
+              </div>
             </div>
           </div>
         </div>
@@ -27,38 +35,33 @@ import Loading from '~/components/Loading/Loading';
 import Header from '~/components/blocks/header/Header';
 import Footer from '~/components/blocks/footer/Footer';
 
-import PageTitle from '~/components/blocks/journal-single-post/PageTitle';
-import Meta from '~/components/blocks/journal-single-post/Meta';
-import Tags from '~/components/blocks/journal-single-post/Tags';
-import Comments from '~/components/blocks/journal-single-post/Comments';
+import PageTitle from '~/components/blocks/journal/PageTitle';
+import Blog from '~/components/blocks/journal/Blog';
+import LoadMore from '~/components/Loadmore/Loadmore';
 import Sidebar from '~/components/blocks/journal/Sidebar';
-import Programs from "@/components/pages/Programs";
 
 export default {
-  middleware: ['isUser'],
   components: {
-    Programs,
     Loading,
     Header,
     PageTitle,
-    Meta,
-    Tags,
-    Comments,
+    Blog,
+    LoadMore,
     Sidebar,
     Footer
   },
   mounted: function() {
-    document.body.classList.add( 'single-post' );
+    document.body.classList.add( 'blog' );
     document.body.classList.add( 'bg-fixed' );
     document.body.classList.add( 'bg-line' );
   },
   beforeDestroy() {
-    document.body.classList.remove( 'single-post' );
+    document.body.classList.remove( 'blog' );
     document.body.classList.remove( 'bg-fixed' );
     document.body.classList.remove( 'bg-line' );
   },
   metaInfo: {
-    title: 'Journal single post | Oxer - Minimal Portfolio Vue JS Template',
+    title: 'Journal | Oxer - Minimal Portfoli Vue JS Template',
     titleTemplate: '%s'
   }
 }
