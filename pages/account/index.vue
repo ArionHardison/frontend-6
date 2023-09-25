@@ -116,7 +116,7 @@ import ImageComponent from "@/components/blocks/ui/ImageComponent.vue"
 import GlobalModuleTasksListComponent from "@/components/Program/components/GlobalModuleTasksListComponent.vue"
 import api from "@/mixins/api";
 export default {
-  middleware: ['isUser'],
+  middleware: ['maintenance', 'isGuest'],
   mixins: [api],
   components: {
     GlobalModuleTasksListComponent,

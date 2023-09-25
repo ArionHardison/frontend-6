@@ -29,6 +29,7 @@ import RegistrationForm from "@/components/Forms/RegistrationForm";
 import PageTitle from '~/components/blocks/contacts/PageTitle';
 
 export default {
+  middleware: ['maintenance', 'isGuest'],
   components: {
     Loading,
     Header,

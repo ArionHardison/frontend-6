@@ -54,6 +54,7 @@
             PageTitle,
             Footer
         },
+        middleware: ['maintenance'],
         mounted: function() {
             document.body.classList.add( 'search-results' );
             document.body.classList.add( 'bg-fixed' );

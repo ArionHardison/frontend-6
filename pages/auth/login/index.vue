@@ -29,6 +29,7 @@
     import PageTitle from '~/components/blocks/contacts/PageTitle';
 
     export default {
+        middleware: ['maintenance', 'isGuest'],
         components: {
             Loading,
             Header,

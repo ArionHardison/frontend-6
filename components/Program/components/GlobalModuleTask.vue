@@ -7,7 +7,7 @@
       }}</span>
 
     <nuxt-link
-      class="btn btn-success"
+      class="btn btn-primary"
       :to="`/account/task/${task.id}`"
     >
       Start

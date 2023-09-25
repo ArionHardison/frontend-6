@@ -13,7 +13,6 @@ export default {
                     }else{
                         call = container[container.length-1].container_call;
                     }
-                    console.log("CONTAINER",container);
                     sortedContainers[call] = container;
                 }
             }

@@ -6,7 +6,7 @@
                     <div class="loading-content">
                         <div class="logo logo-secondary">
                             <transition appear>
-                                <img class="animated zoomIn" v-if="show" src="assets/img/logo/logo-2.svg" alt="Logo">
+                                <img class="animated zoomIn" v-if="show" :src="logo" alt="Logo">
                             </transition>
                         </div>
                     </div>
@@ -24,6 +24,11 @@
                 isLoading: true,
                 show: false,
             }
+        },
+        computed: {
+          logo() {
+            return this.$imageUrl(this.$store.state.layout.items.logo, 'tb');
+          },
         },
         mounted() {
             this.show = true;

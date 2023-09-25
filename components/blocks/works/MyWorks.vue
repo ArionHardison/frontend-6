@@ -3,6 +3,12 @@
        <div class="wrapper">
             <ul class="gallery-filter list-unstyled no-space">
                 <template v-if="containers.workCats">
+                  <li @click="filter">
+                    <a title="All" class="btn btn-link transform-scale-h click" data-filter="*" href="">All</a>
+                  </li>
+                  <li>
+                    <span class="btn btn-link">-</span>
+                  </li>
                  <fragment v-for="category in containers.workCats" :key="category.id">
                         <li @click="filter">
                             <a :title="category.catname" class="btn btn-link transform-scale-h click" :data-filter="category.filter" href="">{{ category.catname }}</a>
@@ -75,13 +81,15 @@
               })
             }
             this.containers = containers;
-            console.log(this.containers);
-            this.setUIprops();
+            setTimeout(()=>{
+              this.setUIprops();
+            }, 500);
+
         },
         methods: {
             setUIprops(){
               if(process.client) {
-              /**  const lastLi = document.querySelector('.gallery .gallery-filter').lastElementChild;
+                const lastLi = document.querySelector('.gallery .gallery-filter').lastElementChild;
                 lastLi.remove();
 
                 const filters = document.querySelectorAll('.gallery-filter .click');
@@ -107,7 +115,7 @@
                       this.iso.layout();
                     });
                   });
-                });**/
+                });
               }
             },
             filter: function( event ) {

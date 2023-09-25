@@ -35,7 +35,7 @@
     import FollowProgramComponent from "@/components/Program/FollowProgramComponent.vue";
 
     export default {
-        middleware: ['isUser'],
+        middleware: ['isUser', 'maintenance'],
         components: {
           FollowProgramComponent,
             Loading,

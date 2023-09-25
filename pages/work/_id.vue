@@ -70,6 +70,7 @@
             Footer
         },
         mixins: [api],
+        middleware: ['maintenance'],
         data() {
             return {
                 items: [],

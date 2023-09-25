@@ -14,7 +14,7 @@
       </template>
     </template>
     <nuxt-link
-      class="btn btn-success"
+      class="btn btn-primary"
       :to="`follow-program?id=${task.id}`"
     >
       <template v-if="task.should_schedule && !task.schedule_run">
@@ -26,8 +26,10 @@
 </template>
 
 <script>
+import CountDown from "@/components/Program/components/challenge/CountDown.vue";
 export default {
   name: "AssignedTask",
+  components: {CountDown},
   props: ["task"],
   beforeMount() {
     if (this.target) {
@@ -37,4 +39,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.card {
+  height: auto !important;
+  margin-bottom: 10px;
+}
+</style>

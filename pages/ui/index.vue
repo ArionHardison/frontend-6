@@ -56,6 +56,7 @@
             Footer,
             Prism
         },
+        middleware: ['maintenance'],
         mounted: function() {
             document.body.classList.add( 'ui' );
             document.body.classList.add( 'bg-fixed' );

@@ -8,6 +8,7 @@ export default {
   components: {
     Programs
   },
+  middleware: ['maintenance'],
   name: "index"
 }
 </script>

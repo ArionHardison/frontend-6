@@ -62,6 +62,7 @@ import time from "@/mixins/time";
 
 export default {
   mixins: [api, time],
+  middleware: ['maintenance'],
   components: {
     Loading,
     Header,

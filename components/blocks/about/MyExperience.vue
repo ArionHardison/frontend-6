@@ -1,32 +1,33 @@
 <template>
     <div id="my-experience" class="block spacer p-top-xl">
-        <h2>My <span class="line">experience.</span></h2>
-        
+        <h2>{{experience.regtitleexp}} <span class="line">{{experience.hightitleexp}}</span></h2>
         <div class="row gutter-width-lg with-pb-lg">
-            <div v-for="item in items" :key="item.id" class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                <div class="card border-0">
-                    <div class="card-body p-0">
-                        <h4>{{ item.position }}</h4>
-                        
-                        <p class="p-small text-secondary bold">2015 May - {{ new Date().getFullYear() }} April</p>
-                        
-                        <p>{{ item.description }}</p>
-                    </div>  
-                </div>
-            </div>
+            <template v-for="item in experience.expitemslist" >
+              <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="card border-0">
+                      <div class="card-body p-0">
+                          <h4>{{ item.expitemtitle }}</h4>
+
+                          <p class="p-small text-secondary bold">{{item.expstartdate}} - {{ item.expenddate }}</p>
+
+                          <p>{{ item.expdesc }}</p>
+                      </div>
+                  </div>
+              </div>
+            </template>
         </div>
     </div>
 </template>
 
 <script>
-    import ExperienceData from '~/data/about/experienceData.json';
 
     export default {
         name: 'My-Experience',
-        data() {
-            return {
-                items: ExperienceData.experienceData
-            }
-        }
+        props: {
+          experience: {
+            type: Object,
+            default: {}
+          }
+        },
     }
 </script>

@@ -36,6 +36,7 @@ import Header from '~/components/blocks/header/Header';
 import Footer from "~/components/blocks/footer/Footer";
 export default {
   name: "GlobalTask",
+  middleware: ['maintenance', 'isGuest'],
   components: {
     Assessment,
     Challenge,
@@ -46,7 +47,6 @@ export default {
     Footer
   },
   mixins: [api],
-  middleware: "user",
   data() {
     return {
       currentTask: null,

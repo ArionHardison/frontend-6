@@ -69,6 +69,7 @@ const mutations = {
     setTenant(state, tenant) {
         state.layout = tenant.layout;
         state.initializedId = tenant.id;
+        state.maintenance = tenant.maintenance;
     },
     signOut(state) {
         state.authData = {
@@ -109,7 +110,6 @@ const actions = {
             ? process.env.CORE_INIT_URL
             : "https://web.codifyhealthcare.com/api"
         const tenant = await this.$axios.$get(`${absoluteUrl}/tenant/initialize/${url}`);
-        console.log(tenant);
         commit("setTenant", cloneDeep(tenant.data));
     }
 };

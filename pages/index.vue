@@ -53,6 +53,7 @@ import api from "@/mixins/api";
 
 export default {
   mixins: [api],
+  middleware: ['maintenance'],
   components: {
     Loading,
     Header,

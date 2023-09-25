@@ -1,6 +1,6 @@
 <template>
     <router-link title="Logo" class="logo logo-secondary transform-scale-h" to="/">
-        <img @click="closeModal"  src="assets/img/logo/logo-2.svg" alt="Logo">
+        <img @click="closeModal"  :src="logo" alt="Logo">
     </router-link>
 </template>
 
@@ -13,7 +13,10 @@
             },
             showMenuModal () {
                 return this.$store.state.showMenuModal
-            }
+            },
+            logo() {
+               return this.$imageUrl(this.$store.state.layout.items.logo, 'tb');
+            },
         },
         methods: {
             closeModal: function() {

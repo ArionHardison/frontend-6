@@ -57,6 +57,7 @@ export default {
     PageTitle,
     Footer
   },
+  middleware: ['maintenance', 'isGuest'],
   mixins: [api],
   data() {
     return {

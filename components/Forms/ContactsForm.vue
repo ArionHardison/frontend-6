@@ -2,16 +2,29 @@
     <form v-on:submit.prevent="submitForm" class="wpcf7-form">
         <p class="input-group gutter-width-30">
             <span class="gutter-width">
-                <input v-model="form.name" name="name" type="text" size="30" maxlength="245" required="required" placeholder="Name *">
+                <input-field
+                    class="mb-4"
+                    name="email"
+                    type="text"
+                    v-model="form.cformname"
+                    placeholder="Name"
+                />
             </span>
                                 
             <span class="gutter-width">
-                <input v-model="form.email" name="email" type="email" size="30" maxlength="100" required="required" placeholder="Email/Phone no. *">
+               <input-field
+                   class="mb-4"
+                   name="email"
+                   type="text"
+                   v-model="form.emailorphone"
+                   placeholder="Email/Phone no. *"
+               />
             </span>
         </p>
         
         <p>
-            <textarea v-model="form.message" name="message" cols="45" rows="8" maxlength="65525" required="required" placeholder="Message *"></textarea>
+
+          <TextareaField v-model="form.message" name="message" custom-class="mt-1"/>
         </p>
                             
         <p class="mb-0">
@@ -27,15 +40,18 @@
 </template>
 
 <script>
-    import axios from 'axios';
-
+    import api from "@/mixins/api";
+    import InputField from "@/components/Forms/Fields/InputField.vue";
+    import TextareaField from "@/components/Forms/Fields/TextareaField.vue";
     export default {
         name: 'ContactsForm',
+      components: {InputField, TextareaField},
+      mixins:[api],
         data() {
             return {
                 form: {
-                    name: '',
-                    email: '',
+                    cformname: '',
+                    emailorphone: '',
                     message: ''
                 },
                 successMessage: "Sender's message was sent successfully",
@@ -47,39 +63,27 @@
             }
         },
         methods: {
-            async submitForm() {
-                axios.post( 'https://store.adveits.com/API/form.php', this.form, {
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                        'Content-Type': 'application/json; charset=UTF-8'
-                    },
-                }, ).then( response => {
-                    if ( response.data.status === 'success' ) {
-                        this.responseMessage = this.successMessage;
-                    }
 
-                    if ( response.data.status === 'warning' ) {
-                        this.responseMessage = this.warningMessage;
-                    }
 
-                    if ( response.data.status === 'error' ) {
-                        this.responseMessage = this.errorMessage;
-                    }
-                    this.alertClass = response.data.status;
-                    this.callAlert  = true;
+          async submitForm() {
+              const requestSent = await this.post("public/store-client-container/contactUs", this.form);
+              if(requestSent){
+                this.form = {
+                  cformname: '',
+                  emailorphone: '',
+                  message: ''
+                }
+                this.responseMessage = this.successMessage;
+                this.alertClass = 'success';
+              }else{
+                this.responseMessage = this.errorMessage;
+                this.alertClass = 'danger';
+              }
+              this.callAlert       = true;
 
-                    setTimeout( () => {
-                        this.callAlert = false;
-                    }, 2000 )
-                } ).catch( error => {
-                    this.responseMessage = this.errorMessage;
-                    this.alertClass      = 'danger';
-                    this.callAlert       = true;
-
-                    setTimeout( () => {
-                        this.callAlert = false;
-                    }, 2000 )
-                } );
+            setTimeout( () => {
+              this.callAlert = false;
+            }, 2000 )
             }
         }
     }

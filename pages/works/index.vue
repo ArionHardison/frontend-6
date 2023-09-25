@@ -32,6 +32,7 @@
             MyWorks,
             Footer
         },
+        middleware: ['maintenance'],
         mounted: function() {
             document.body.classList.add( 'archive' );
             document.body.classList.add( 'bg-fixed' );
