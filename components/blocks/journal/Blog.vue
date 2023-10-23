@@ -26,7 +26,7 @@
             </div>
           </div>
         </div>
-        <template v-if="programItems.meta.current_page < programItems.meta.last_page"> -->
+        <template v-if="programItems.meta.current_page < programItems.meta.last_page">
           <Loadmore @load="loadMorePrograms"/>
         </template>
       </template>

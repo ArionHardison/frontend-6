@@ -81,9 +81,9 @@
               }
               this.callAlert       = true;
 
-            setTimeout( () => {
-              this.callAlert = false;
-            }, 2000 )
+              setTimeout( () => {
+                this.callAlert = false;
+              }, 2000 )
             }
         }
     }
